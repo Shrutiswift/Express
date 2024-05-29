@@ -1,22 +1,27 @@
-// require('dotenv').config()
-
 const express = require('express')
-
+const path = require('path')
 const app = express()
 const port = 3000
+const test = require('./routes/test')
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+app.use('/test', test)
+
+app.post('/', (req, res) => {
+    res.send('Hello Post')
 })
-app.get('/twitter',(req, res)=>{
-    res.send('Shrutiswiftdotcom')
+
+app.get('/:s', (req, res) => {
+    // console.log(req.params)
+    // console.log(req.query)
+    res.send(`hello  ${req.params.s}`)
 })
-app.get('/login', (req, res)=>{
-    res.send('<h4>Please login in at shrutiswift.com</h4>')
-})
-app.get('/youtube', (req, res)=>{
-    res.send('<h2>Shrutiswift</h2>')
-})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+// app.use(express.static('Portfolio'))
+
+// app.get('/', (req, res) => {
+//     res.send('Hello')
+// })
